@@ -98,6 +98,16 @@ public class PlayerAttackInfo
             return m_Color;
         }
     }
+
+    [SerializeField]
+    private bool m_Bomb;
+    public bool Bomb
+    {
+        get
+        {
+            return m_Bomb;
+        }
+    }
     #endregion
 
     #region Public Variables

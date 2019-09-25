@@ -111,6 +111,7 @@ MonoBehaviour:
     m_Cooldown: 2
     m_HealthCost: 5
     m_Color: {r: 0.99215686, g: 0.18039216, b: 0.85882354, a: 0}
+    m_Bomb: 0
   - m_Name: MegaLaser
     m_Button: Fire2
     m_TriggerName: ShootMegaLaser
@@ -122,6 +123,19 @@ MonoBehaviour:
     m_Cooldown: 2.5
     m_HealthCost: 5
     m_Color: {r: 0.9529412, g: 0.16078432, b: 0.16078432, a: 0}
+    m_Bomb: 0
+  - m_Name: BombLaser
+    m_Button: Fire3
+    m_TriggerName: ShootBombLaser
+    m_AbilityGO: {fileID: 8486783592351315732, guid: 0ea0cc71623ab354b9925c0bb9d33d48,
+      type: 3}
+    m_offset: {x: 0, y: 0, z: 0}
+    m_WindUpTime: 1.5
+    m_FrozenTime: 2.3
+    m_Cooldown: 2.5
+    m_HealthCost: 5
+    m_Color: {r: 0, g: 0.024961233, b: 1, a: 0}
+    m_Bomb: 1
   m_MaxHealth: 50
   m_HUD: {fileID: 0}
 --- !u!1 &449204092354333053

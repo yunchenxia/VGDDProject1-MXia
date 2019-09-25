@@ -181,14 +181,23 @@ public class PlayerController : MonoBehaviour
     {
 
         cc_Rb.rotation = Quaternion.Euler(0, m_CameraTransform.eulerAngles.y, 0);
+        Quaternion new_Rotation = cc_Rb.rotation;
         cr_Anim.SetTrigger(attack.TriggerName);
         IEnumerator toColor = ChangeColor(attack.AbilityColor, 10);
         StartCoroutine(toColor);
         yield return new WaitForSeconds(attack.WindUpTime);
 
         Vector3 offset = transform.forward * attack.Offset.z + transform.right * attack.Offset.x + transform.up * attack.Offset.y;
-        GameObject go = Instantiate(attack.AbilityGO, transform.position + offset, cc_Rb.rotation);
-        go.GetComponent<Ability>().Use(transform.position + offset);
+        Vector3 spawnPos = transform.position + offset;
+        if (attack.Bomb)
+        {
+            spawnPos = new Vector3(transform.position.x, 40, transform.position.z);
+            Quaternion current_Rotation = attack.AbilityGO.transform.rotation;
+            new_Rotation = new Quaternion(-current_Rotation.x, current_Rotation.y, current_Rotation.z, current_Rotation.w);
+            
+        }
+        GameObject go = Instantiate(attack.AbilityGO, spawnPos, new_Rotation);
+        go.GetComponent<Ability>().Use(spawnPos);
 
         StopCoroutine(toColor);
         StartCoroutine(ChangeColor(p_DefaultColor, 50));

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
@@ -26,10 +24,17 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private int m_Score;
 
+    [SerializeField]
+    private bool m_teleporter;
+
+    [SerializeField]
+    private float m_teleportTimer;
     #endregion
 
     #region Private Variables
     private float p_curHealth;
+
+    private Vector3[] p_possible;
     #endregion
 
     #region Cached Components
@@ -53,12 +58,37 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         cr_Player = FindObjectOfType<PlayerController>().transform;
+        m_teleportTimer = 3;
     }
     #endregion
 
     #region Main Updates
+    private void Update()
+    {
+        if (m_teleporter && m_teleportTimer <= 0)
+        {
+            m_teleportTimer = 3;
+            float x = transform.position.x;
+            float y = transform.position.y;
+            float z = transform.position.z;
+            p_possible = new Vector3[8];
+            p_possible[0] = new Vector3(x + 4, y, z);
+            p_possible[1] = new Vector3(x, y, z + 4);
+            p_possible[2] = new Vector3(x - 4, y, z);
+            p_possible[3] = new Vector3(x, y, z - 4);
+            p_possible[4] = new Vector3(x + 4, y, z + 4);
+            p_possible[5] = new Vector3(x + 4, y, z - 4);
+            p_possible[6] = new Vector3(x - 4, y, z + 4);
+            p_possible[7] = new Vector3(x - 4, y, z - 4);
+            int index = Random.Range(0, 8);
+            transform.position = p_possible[index];
+        }
+        m_teleportTimer -= Time.deltaTime;
+    }
+
     private void FixedUpdate()
     {
+     
         Vector3 dir = cr_Player.position - transform.position;
         dir.Normalize();
         cc_Rb.MovePosition(cc_Rb.position + dir * m_Speed * Time.fixedDeltaTime);

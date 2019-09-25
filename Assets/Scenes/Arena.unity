@@ -501,6 +501,11 @@ MonoBehaviour:
       type: 3}
     m_TimeToNextSpawn: 1
     m_NumberToSpawn: 0
+  - m_Name: Teleporter
+    m_EnemyGO: {fileID: 6884825251917979565, guid: fcf471bb16ea3a746816deafe23d4c9a,
+      type: 3}
+    m_TimeToNextSpawn: 2
+    m_NumberToSpawn: 0
 --- !u!4 &1351672169
 Transform:
   m_ObjectHideFlags: 0
